@@ -31,7 +31,7 @@ class Game:
                         self.surface.fill((10,10,10))    # fuellt mit einer Hintergrundfarbe (schwarz)
                         pygame.display.flip()            # refresht das Display
        
-                # Durch schließen des Fensters wird running ebenfalls auf False gesetzt
+                # Und Wenn das Event "QUIT" also Fensterschließen eintritt, geht running auch auf False
                 elif event.type == QUIT:
                     running = False
 
