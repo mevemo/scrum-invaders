@@ -27,7 +27,7 @@ class Game:
                     if event.key == K_w:
                         self.surface.fill((255,255,255)) # fuellt mit einer Hintergrundfarbe (weiss)
                         pygame.display.flip()            # Uebertraegt dann die Aenderung auf das Display
-                    if event.key == K_b:
+                    if event.key == K_s:
                         self.surface.fill((10,10,10))    # fuellt mit einer Hintergrundfarbe (schwarz)
                         pygame.display.flip()            # refresht das Display
        
