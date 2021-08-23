@@ -3,6 +3,7 @@ from pygame.locals import *
 import time
 
 class Menue:
+    # tolle sache
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
         self.image = pygame.image.load("platzhalter_menue.jpg").convert()
