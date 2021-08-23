@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
-
+# Toller neuer Kommentar
 class Game:
     def __init__(self):
         pygame.init()
