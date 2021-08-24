@@ -43,7 +43,7 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-    
+    FPS = 60
        
     def run(self):
         running = True
