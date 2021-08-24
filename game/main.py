@@ -16,7 +16,6 @@ VEL = 10
 START_MUSIC = pygame.mixer.Sound('start_music.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 
-FPS = 60
 
 # Spieltitel und Icon
 pygame.display.set_caption("Space Invaders")
