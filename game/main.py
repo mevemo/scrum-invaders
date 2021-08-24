@@ -13,7 +13,7 @@ SPACESHIP_HEIGHT = 50
 START_X = 500
 START_Y = 500
 VEL = 5
-START_MUSIC = pygame.mixer.load('start_music.mp3')
+START_MUSIC = pygame.mixer.Sound('start_music.mp3')
 
 # Spieltitel und Icon
 pygame.display.set_caption("Space Invaders")
