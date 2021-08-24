@@ -26,6 +26,25 @@ pygame.display.set_icon(icon)
 START_MUSIC.play()
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
+
+"""
+class Ship:
+     Hier wird die ship-klasse definiert 
+    def __init__(self, parent_screen):
+        # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
+        self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
+        self.parent_screen = parent_screen
+        self.image = pygame.image.load("ship.png").convert()
+
+    def draw(self):
+        self.parent_screen.blit(self.image, (self.spieler.x, self.spieler.y))
+        pygame.display.flip()
+
+"""
+
+class Gegner:
+    pass
+
 class Game:
     def __init__(self):
         # Initialisiert Pygame:
@@ -34,6 +53,7 @@ class Game:
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
+        #self.ship = Ship(self.surface)
 
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
         self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) 
@@ -71,6 +91,8 @@ class Game:
 
             # Male das alte Bild über
             self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
+
+            self.ship.draw()
 
             # Zeichne das SPACESHIP
             self.surface.blit(SPACESHIP, (self.spieler.x, self.spieler.y))
