@@ -12,24 +12,30 @@ SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
 START_X = 500
 START_Y = 500
-VEL = 5
+VEL = 10
 START_MUSIC = pygame.mixer.Sound('start_music.mp3')
+SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 
 # Spieltitel und Icon
 pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
 
-
-START_MUSIC.play()
+# Löst das Abspielen der Musik aus
+# START_MUSIC.play()
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
 class Game:
     def __init__(self):
+        # Initialisiert Pygame:
         pygame.init()
+
+        # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
-        self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
-	
+
+        # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
+        self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) 
+
 	    # Gibt dem Fenster eine Beschriftung
         # pygame.display.set_caption(TITEL)
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
@@ -53,16 +59,25 @@ class Game:
                 
                 # Events durch gedrueckthalten
                 if keys_pressed[pygame.K_LEFT]: 
-	                spieler.x -= VEL
+	                self.spieler.x -= VEL
                 if keys_pressed[pygame.K_RIGHT]:
-	                spieler.x += VEL
+	                self.spieler.x += VEL
                     
                 # Durch schließen des Fensters wird running ebenfalls auf False gesetzt
                 elif event.type == QUIT:
                     running = False
 
+            # Male das alte Bild über
+            self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
 
-            time.sleep(0.2)
+            # Zeichne das SPACESHIP
+            self.surface.blit(SPACESHIP, (self.spieler.x, self.spieler.y))
+
+            # RESRESH
+            pygame.display.flip()
+
+            # Mach ma Halblang
+            time.sleep(0.1)
 
 
 
