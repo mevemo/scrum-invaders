@@ -26,7 +26,7 @@ pygame.display.set_icon(icon)
 START_MUSIC.play()
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
-
+# von MAIK
 """
 class Ship:
      Hier wird die ship-klasse definiert 
@@ -41,6 +41,8 @@ class Ship:
         pygame.display.flip()
 
 """
+# bis hier von MAIK
+
 
 class Gegner:
     pass
@@ -92,7 +94,7 @@ class Game:
             # Male das alte Bild über
             self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
 
-            self.ship.draw()
+            # self.ship.draw() # von MAIK
 
             # Zeichne das SPACESHIP
             self.surface.blit(SPACESHIP, (self.spieler.x, self.spieler.y))
