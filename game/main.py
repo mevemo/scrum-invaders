@@ -33,15 +33,12 @@ class Game:
 
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
-<<<<<<< HEAD
         spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
 	
-=======
 
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
         self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) 
 
->>>>>>> 0f52e5924733fa259e079c887a5a8e07a1d646e2
 	    # Gibt dem Fenster eine Beschriftung
         # pygame.display.set_caption(TITEL)
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
