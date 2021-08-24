@@ -12,6 +12,11 @@ START_X = 500
 START_Y = 500
 VEL = 5
 
+# Spieltitel und Icon
+pygame.display.set_caption("Space Invaders")
+icon = pygame.image.load("ufo.png")
+pygame.display.set_icon(icon)
+
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
 class Game:
