@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 import time
 
+pygame.mixer.init()		# Brauchen wir fuer Sound
+
 # Hier definieren wir feste Groessen für das Gesamte Spiel
 BREITE = 1280
 HOEHE = 720
@@ -11,12 +13,15 @@ SPACESHIP_HEIGHT = 50
 START_X = 500
 START_Y = 500
 VEL = 5
+START_MUSIC = pygame.mixer.load('start_music.mp3')
 
 # Spieltitel und Icon
 pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
 
+
+START_MUSIC.play()
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
 class Game:
