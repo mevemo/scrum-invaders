@@ -2,10 +2,14 @@ import pygame
 from pygame.locals import *
 import time
 # Toller neuer Kommentar
+BREITE = 1280
+HOEHE = 720
+TITEL = "Spieltitel"
+
 class Game:
     def __init__(self):
         pygame.init()
-        self.surface = pygame.display.set_mode((1000,500))
+        self.surface = pygame.display.set_mode((BREITE,HOEHE))
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
         # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
        
