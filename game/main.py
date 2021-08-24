@@ -20,11 +20,11 @@ class Game:
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
 	
-	# Gibt dem Fenster eine Beschriftung
-        pygame.display.set_caption(TITEL)
+	    # Gibt dem Fenster eine Beschriftung
+        # pygame.display.set_caption(TITEL)
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
         
-	    pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
+	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
     
        
