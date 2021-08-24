@@ -1,10 +1,12 @@
 import pygame
 from pygame.locals import *
 import time
-# Toller neuer Kommentar
+
+# Hier definieren wir feste Groessen für das Gesamte Spiel
 BREITE = 1280
 HOEHE = 720
 TITEL = "Spieltitel"
+
 
 class Game:
     def __init__(self):
@@ -12,6 +14,8 @@ class Game:
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
         # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
+
+    
        
     def run(self):
         running = True
