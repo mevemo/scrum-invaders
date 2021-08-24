@@ -23,7 +23,8 @@ class Game:
 	# Gibt dem Fenster eine Beschriftung
         pygame.display.set_caption(TITEL)
         # self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
-        # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
+        
+	pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
     
        
