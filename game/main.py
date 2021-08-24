@@ -7,7 +7,7 @@ pygame.mixer.init()		# Brauchen wir fuer Sound
 # Hier definieren wir feste Groessen für das Gesamte Spiel
 BREITE = 1280
 HOEHE = 720
-TITEL = "Spieltitel"
+TITEL = "Space Invaders"
 SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
 START_X = 500
@@ -18,7 +18,7 @@ SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WID
 FPS = 60
 
 # Spieltitel und Icon
-pygame.display.set_caption("Space Invaders")
+pygame.display.set_caption(TITEL)
 icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
 
@@ -118,8 +118,8 @@ class Game:
 
             self.ship.walk() # von MAIK
 
-            # Zeichne das SPACESHIP
-            # self.surface.blit(SPACESHIP, (self.spieler.x, self.spieler.y))
+            # dann kommt später:
+            # self.gegner.walk()
 
             # RESRESH
             pygame.display.flip()
