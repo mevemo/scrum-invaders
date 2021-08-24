@@ -7,6 +7,7 @@ BREITE = 1280
 HOEHE = 720
 TITEL = "Spieltitel"
 
+Spielername = input("Bitte Spielername eingeben: ") # mc Eingabe des Spielernames
 
 class Game:
     def __init__(self):
