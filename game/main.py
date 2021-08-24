@@ -28,7 +28,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
-        spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
+        self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
 	
 	    # Gibt dem Fenster eine Beschriftung
         # pygame.display.set_caption(TITEL)
