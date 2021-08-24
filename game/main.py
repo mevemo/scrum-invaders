@@ -77,7 +77,7 @@ class Game:
             pygame.display.flip()
 
             # Mach ma Halblang
-            time.sleep(0.1)
+            # time.sleep(0.2)
 
 
 
