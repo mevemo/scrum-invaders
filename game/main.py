@@ -28,7 +28,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
-        self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
+        spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
 	
 	    # Gibt dem Fenster eine Beschriftung
         # pygame.display.set_caption(TITEL)
@@ -36,7 +36,6 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-    
        
     def run(self):
         running = True
@@ -72,3 +71,5 @@ if __name__ == "__main__":
 
 
     
+
+#hallo mike
