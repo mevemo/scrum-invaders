@@ -23,6 +23,7 @@ START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 BULLET = pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20))
 FPS = 60
+bullets = []
 
 # Spieltitel und Icon
 pygame.display.set_caption(TITEL)
@@ -130,7 +131,7 @@ class Game:
         
         self.ship = Ship(self.surface)
         self.gegner = Gegner(self.surface)
-        self.bullets = []
+       
 
         # WEGEN NEU NOT NEEDED
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
@@ -141,14 +142,14 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-    def handle_bullets(self):
-        for bullet in self.bullets:
-            bullet.x += BULLET_VEL
-            if red.colliderect(bullet):
-                pygame.event.post(pygame.event.Event(RED_HIT))
-                yellow_bullets.remove(bullet)
-            elif bullet.x > WIDTH:
-                yellow_bullets.remove(bullet)
+    # def handle_bullets(self):
+    #     for bullet in self.bullets:
+    #         bullet.x += BULLET_VEL
+    #         if red.colliderect(bullet):
+    #             pygame.event.post(pygame.event.Event(RED_HIT))
+    #             yellow_bullets.remove(bullet)
+    #         elif bullet.x > WIDTH:
+    #             yellow_bullets.remove(bullet)
 
         
         
@@ -173,7 +174,7 @@ class Game:
                     # Leertaste schiesst Kugeln 
                     if event.key == K_SPACE:
                         bullet = pygame.Rect(self.ship.spieler.x + 25, self.ship.spieler.y, 10, 10)
-                        self.bullets.append(bullet)
+                        bullets.append(bullet)
                         
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
@@ -194,9 +195,12 @@ class Game:
 
             self.gegner.walk() # von Maik
 
-            for bullet in self.bullets:
+            for bullet in bullets:
                 # pygame.draw.rect(self.surface, BLUE, bullet)
-                bullet.y -= BULLET_VEL
+                if bullet.y - BULLET_VEL > 100:
+                    bullet.y -= BULLET_VEL  
+                else: 
+                    bullets.remove(bullet)
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             # dann kommt später:
             # self.gegner.walk()
