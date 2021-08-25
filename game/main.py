@@ -85,10 +85,10 @@ class Gegner:
                 self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
             elif i < 36:
                 self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
-        
+		
+        self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
         self.step = 1
         self.parent_screen = parent_screen
-        self.image = SPACESHIP
         self.count = 0
     
     def walk(self):
