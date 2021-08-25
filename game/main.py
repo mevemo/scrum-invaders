@@ -21,7 +21,7 @@ BULLET_Y = 50
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BULLET = pygame.transform.scale(pygame.image.pygame.image.load('bullet1.png'))
+BULLET = pygame.transform.scale(pygame.image.load('bullet1.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 FPS = 60
 
 # Spieltitel und Icon
