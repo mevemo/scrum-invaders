@@ -12,7 +12,7 @@ SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
 START_X = 500
 START_Y = 500
-VEL = 10
+VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 FPS = 60
@@ -66,8 +66,8 @@ class Ship:
 # bis hier von MAIK
 
 
-class Gegner:
-    def __init__(self):
+# class Gegner:
+    # def __init__(self):
         # self.
 
 class Game:
