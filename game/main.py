@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import time
+import random
 
 pygame.mixer.init()		# Brauchen wir fuer Sound
 
@@ -15,13 +16,10 @@ GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
-BULLET_X = 0
-BULLET_Y = 50
 
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BULLET = pygame.transform.scale(pygame.image.pygame.image.load('bullet1.png'))
 FPS = 60
 
 # Spieltitel und Icon
@@ -62,7 +60,7 @@ class Ship:
 
     def walk(self):
         """ Hier ist festgelegt wie sich das Ship bewegen darf """
-        if self.spieler.x + self.step > BREITE:
+        if self.spieler.x + self.step > BREITE - 50:
             self.spieler.x = 0
         elif self.spieler.x + self.step < 0:
             self.spieler.x = BREITE - SPACESHIP_WIDTH
@@ -134,14 +132,6 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-    
-    #Bullets Klasse 
-    class Bullet():
-        pass
-        
-            
-    
-    
        
     def run(self):
         running = True
@@ -160,11 +150,6 @@ class Game:
                     # Rechter Pfeil verursacht Bewegung nach links
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
-                    # Bullets schiessen
-                    if event.key == K_SPACE:
-                        bullet = pygame.Rect(SPACESHIP_HEIGHT, SPACESHIP_WIDTH)
-                        bullet.append('bullet1.png')
-                       
                         
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
