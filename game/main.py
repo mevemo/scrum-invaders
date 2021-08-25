@@ -33,25 +33,24 @@ Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des 
 class Ship:
     """ Hier wird die ship-klasse definiert """
     def __init__(self, parent_screen):
-	""" Diese Methode wird immer dann ausgeführt, wenn ein neues Ship erschaffen wird"""
+	    # """ Diese Methode wird immer dann ausgeführt, wenn ein neues Ship erschaffen wird"""
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
         self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
 	
-	# Ordnet den mitangegebenen parent_screen einer eigenen variablen zu
+	    # Ordnet den mitangegebenen parent_screen einer eigenen variablen zu
         self.parent_screen = parent_screen
 	
-	# Weist dem Ship eine Variable image zu
+	    # Weist dem Ship eine Variable image zu
         self.image = SPACESHIP
 	
-	# Setzt die Schrittweite (Die Bewegung des Schiffs) am Anfang auf Null
+	    # Setzt die Schrittweite (Die Bewegung des Schiffs) am Anfang auf Null
         self.step = 0
 
     def draw(self):
-	""" Mit dieser Methode kann ein Schiff sich auf dem zugeordneten Bildschirm zeichnen"""
+	    # """ Mit dieser Methode kann ein Schiff sich auf dem zugeordneten Bildschirm zeichnen"""
         # Das Bild wird dem Screen hinzugefügt
-	self.parent_screen.blit(self.image, (self.spieler.x, self.spieler.y))
-	# Danach wird das Display refreshed
-        pygame.display.flip()
+	    self.parent_screen.blit(self.image, (self.spieler.x, self.spieler.y))
+        # pygame.display.flip()
 
 
     def walk(self):
