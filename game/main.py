@@ -16,7 +16,7 @@ GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
-
+bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -36,6 +36,8 @@ pygame.display.set_icon(icon)
 # Eingabe des Spielernamens
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
+def draw_bg():
+    Display.blit(bg, (0, 0))
 
 # Ab hier von MAIK
 class Ship:
@@ -156,7 +158,8 @@ class Game:
     def run(self):
         running = True
         clock = pygame.time.Clock()
-        while running:            
+        while running: 
+	    draw_bg()
             clock.tick(FPS)
             for event in pygame.event.get():
                 # Events durch Runterdruecken:
@@ -188,7 +191,7 @@ class Game:
                     running = False
 
             # Male das alte Bild über
-            self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
+            #self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
 
             self.ship.walk() # von MAIK
 
