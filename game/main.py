@@ -14,7 +14,7 @@ GEGNER_WIDTH = 50
 GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
-BLUE = (0, 255, 0)
+BLUE = (100, 100, 100)
 
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -75,20 +75,33 @@ class Gegner:
         # self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
         self.list= []
         for i in range(50):
-            if i < 10:
+            if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
-            elif i < 20:
-                self.list.append([1, pygame.Rect((50 + (i * 100) - BREITE ), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
-            elif i < 30:
-                self.list.append([1, pygame.Rect((50 + (i * 100) - 2 * BREITE + 50), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            elif i < 24:
+                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            elif i < 36:
+                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
         
         self.step = 1
         self.parent_screen = parent_screen
         self.image = SPACESHIP
+        self.count = 0
     
     def walk(self):
-        for ding in self.list:
-            ding[1].y += self.step
+        
+        if self.count //10 % 2 == 0:
+            for ding in self.list:
+                ding[1].x += self.step
+                ding[1].y += self.step
+
+        else:
+            for ding in self.list:
+                ding[1].x -= self.step
+                ding[1].y += self.step
+
+        
+            self.count += 1
+        
         self.draw()
     
     def draw(self):
