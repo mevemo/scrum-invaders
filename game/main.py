@@ -159,8 +159,8 @@ class Game:
         running = True
         clock = pygame.time.Clock()
         while running: 
-	    draw_bg()
             clock.tick(FPS)
+	    draw_bg()
             for event in pygame.event.get():
                 # Events durch Runterdruecken:
                 if event.type == KEYDOWN:
