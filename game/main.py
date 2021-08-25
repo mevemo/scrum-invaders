@@ -17,6 +17,7 @@ START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
 
+BULLET_VEL = 10
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
@@ -129,6 +130,7 @@ class Game:
         
         self.ship = Ship(self.surface)
         self.gegner = Gegner(self.surface)
+        self.bullets = []
 
         # WEGEN NEU NOT NEEDED
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
@@ -139,8 +141,17 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
+    def handle_bullets(self):
+        for bullet in self.bullets:
+            bullet.x += BULLET_VEL
+            if red.colliderect(bullet):
+                pygame.event.post(pygame.event.Event(RED_HIT))
+                yellow_bullets.remove(bullet)
+            elif bullet.x > WIDTH:
+                yellow_bullets.remove(bullet)
 
-    
+        
+        
            
     def run(self):
         running = True
@@ -159,9 +170,10 @@ class Game:
                     # Rechter Pfeil verursacht Bewegung nach links
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
-                    # Leertaste schiesst Kugeln
+                    # Leertaste schiesst Kugeln 
                     if event.key == K_SPACE:
-                        pass 
+                        bullet = pygame.Rect(self.ship.spieler.x + 25, self.ship.spieler.y, 10, 10)
+                        self.bullets.append(bullet)
                         
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
@@ -182,6 +194,10 @@ class Game:
 
             self.gegner.walk() # von Maik
 
+            for bullet in self.bullets:
+                # pygame.draw.rect(self.surface, BLUE, bullet)
+                bullet.y -= BULLET_VEL
+                self.surface.blit(BULLET, (bullet.x, bullet.y))
             # dann kommt später:
             # self.gegner.walk()
 
