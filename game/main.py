@@ -10,8 +10,9 @@ HOEHE = 720
 TITEL = "Space Invaders"
 SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
-START_X = 500
-START_Y = 500
+START_X =  (BREITE - SPACESHIP_WIDTH) / 2
+START_Y =HOEHE - SPACESHIP_HEIGHT -20
+
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
@@ -55,7 +56,7 @@ class Ship:
 
     def walk(self):
         """ Hier ist festgelegt wie sich das Ship bewegen darf """
-        if self.spieler.x + self.step > BREITE:
+        if self.spieler.x + self.step > BREITE - 50:
             self.spieler.x = 0
         elif self.spieler.x + self.step < 0:
             self.spieler.x = BREITE - SPACESHIP_WIDTH
