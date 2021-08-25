@@ -20,6 +20,7 @@ BLUE = (100, 100, 100)
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
+BULLET = pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20))
 FPS = 60
 
 # Spieltitel und Icon
@@ -111,6 +112,12 @@ class Gegner:
             pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
 
+# Schiessen Kugel
+class Bullet():
+    def __init__(self):
+        #pygame.Rect('bullet1.png')
+        pass
+        
 
 class Game:
     def __init__(self):
@@ -132,7 +139,9 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-       
+
+    
+           
     def run(self):
         running = True
         clock = pygame.time.Clock()
@@ -150,13 +159,16 @@ class Game:
                     # Rechter Pfeil verursacht Bewegung nach links
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
+                    # Leertaste schiesst Kugeln
+                    if event.key == K_SPACE:
+                        pass 
                         
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
                         self.ship.step = 0
                     if event.key == K_RIGHT:
                         self.ship.step = 0
-
+                
 
                     
                 # Durch schließen des Fensters wird running ebenfalls auf False gesetzt
