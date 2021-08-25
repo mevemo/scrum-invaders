@@ -66,9 +66,26 @@ class Ship:
 # bis hier von MAIK
 
 
-# class Gegner:
-    # def __init__(self):
-        # self.
+class Gegner:
+    def __init__(self, parent_screen):
+        self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
+        self.step = 10
+        self.parent_screen = parent_screen
+    
+    def walk(self):
+        for ding in self.list:
+            ding[1] += self.step
+        self.draw()
+    
+    def draw():
+        pass
+
+        # for i in range(8):
+            # die ersten 4 haben die gleichen y werte
+
+
+     # for ding in liste:
+       #   ´zeichne.ding.(x,y)       
 
 class Game:
     def __init__(self):
