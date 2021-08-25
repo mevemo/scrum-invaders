@@ -36,8 +36,8 @@ pygame.display.set_icon(icon)
 # Eingabe des Spielernamens
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
-def draw_bg():
-    Display.blit(bg, (0, 0))
+def draw_bg(parent_screen):
+    parent_screen.blit(bg, (0, 0))
 
 # Ab hier von MAIK
 class Ship:
@@ -116,12 +116,6 @@ class Gegner:
             pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
 
-# Schiessen Kugel
-class Bullet():
-    def __init__(self):
-        #pygame.Rect('bullet1.png')
-        pass
-        
 
 class Game:
     def __init__(self):
@@ -160,7 +154,7 @@ class Game:
         clock = pygame.time.Clock()
         while running: 
             clock.tick(FPS)
-            draw_bg()
+            draw_bg(self.surface)
             for event in pygame.event.get():
                 # Events durch Runterdruecken:
                 if event.type == KEYDOWN:
