@@ -67,7 +67,8 @@ class Ship:
 
 
 class Gegner:
-    pass
+    def __init__(self):
+        # self.
 
 class Game:
     def __init__(self):
@@ -107,6 +108,13 @@ class Game:
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
                         
+                if event.type == KEYUP:
+                    if event.key == K_LEFT:
+                        self.ship.step = 0
+                    if event.key == K_RIGHT:
+                        self.ship.step = 0
+
+                
                 # keys_pressed = pygame.key.get_pressed()
 
                 # NEU NOT NEEDED

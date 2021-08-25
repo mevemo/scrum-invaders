@@ -90,6 +90,9 @@ class Game:
                         self.snake.move_left()
                     if event.key == K_RIGHT:
                         self.snake.move_right()
+                
+                if event.type == KEYUP:
+                    
 
 
                 elif event.type == QUIT:
