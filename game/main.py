@@ -23,7 +23,7 @@ icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
 
 # Löst das Abspielen der Musik aus
-# START_MUSIC.play()
+#START_MUSIC.play()
 
 # Eingabe des Spielernamens
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
