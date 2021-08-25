@@ -10,21 +10,18 @@ HOEHE = 720
 TITEL = "Space Invaders"
 SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
-<<<<<<< HEAD
-START_X = 500
-START_Y = 500
-VEL = 10
-=======
 GEGNER_WIDTH = 50
 GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
+BULLET_X = 0
+BULLET_Y = 50
 
 VEL = 5
->>>>>>> 5b64eba2822022fe080ac14efec276457fb2fdd7
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
+BULLET = pygame.transform.scale(pygame.image.pygame.image.load('bullet1.png'))
 FPS = 60
 
 # Spieltitel und Icon
@@ -137,13 +134,10 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
-    #Bullets Variablen
-    BULLET = pygame.image.load("bullet1.png")
-    BULLET_X = 0
-    BULLET_Y = 50
     
     #Bullets Klasse 
     class Bullet():
+        pass
         
             
     
@@ -172,19 +166,6 @@ class Game:
                         bullet.append('bullet1.png')
                        
                         
-<<<<<<< HEAD
-   
-                # keys_pressed = pygame.key.get_pressed()
-
-                # NEU NOT NEEDED
-                
-                # Events durch gedrueckthalten
-                # if keys_pressed[pygame.K_LEFT]: 
-	            #     self.spieler.x -= VEL
-                # if keys_pressed[pygame.K_RIGHT]:
-	            #     self.spieler.x += VEL
-                
-=======
                 if event.type == KEYUP:
                     if event.key == K_LEFT:
                         self.ship.step = 0
@@ -192,7 +173,6 @@ class Game:
                         self.ship.step = 0
 
 
->>>>>>> 5b64eba2822022fe080ac14efec276457fb2fdd7
                     
                 # Durch schließen des Fensters wird running ebenfalls auf False gesetzt
                 elif event.type == QUIT:
