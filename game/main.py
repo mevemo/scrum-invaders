@@ -95,14 +95,20 @@ class Gegner:
     
     def walk(self):
         
-        if self.count //10 % 2 == 0:
+        if self.list[11][1].x < BREITE - 50 and self.list[11][1].y % 100 < 55:
             for ding in self.list:
                 ding[1].x += self.step
+
+        elif self.list[11][1].y % 100 < 55:
+            for ding in self.list:
                 ding[1].y += self.step
+
+        elif self.list[0][1].x > 0:
+            for ding in self.list:
+                ding[1].x -= self.step
 
         else:
             for ding in self.list:
-                ding[1].x -= self.step
                 ding[1].y += self.step
 
         
