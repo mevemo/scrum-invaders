@@ -21,7 +21,7 @@ BULLET_VEL = 10
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 270)
+BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 FPS = 60
 bullets = []
 
@@ -196,7 +196,7 @@ class Game:
 
             for bullet in bullets:
                 # pygame.draw.rect(self.surface, BLUE, bullet)
-                if bullet.y - BULLET_VEL > 100:
+                if bullet.y - BULLET_VEL > 0:
                     bullet.y -= BULLET_VEL  
                 else: 
                     bullets.remove(bullet)
