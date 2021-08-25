@@ -10,8 +10,11 @@ HOEHE = 720
 TITEL = "Space Invaders"
 SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
+GEGNER_WIDTH = 50
+GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
+BLUE = (0, 255, 0)
 
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -69,24 +72,31 @@ class Ship:
 
 class Gegner:
     def __init__(self, parent_screen):
-        self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
-        self.step = 10
+        # self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
+        self.list= []
+        for i in range(50):
+            if i < 10:
+                self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            elif i < 20:
+                self.list.append([1, pygame.Rect((50 + (i * 100) - BREITE ), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            elif i < 30:
+                self.list.append([1, pygame.Rect((50 + (i * 100) - 2 * BREITE + 50), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
+        
+        self.step = 1
         self.parent_screen = parent_screen
+        self.image = SPACESHIP
     
     def walk(self):
         for ding in self.list:
-            ding[1] += self.step
+            ding[1].y += self.step
         self.draw()
     
-    def draw():
-        pass
+    def draw(self):
+        for ding in self.list:
+            # self.parent_screen.blit(self.image, (ding[1], ding[2]))
+            pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
-        # for i in range(8):
-            # die ersten 4 haben die gleichen y werte
 
-
-     # for ding in liste:
-       #   ´zeichne.ding.(x,y)       
 
 class Game:
     def __init__(self):
@@ -97,6 +107,7 @@ class Game:
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
         self.ship = Ship(self.surface)
+        self.gegner = Gegner(self.surface)
 
         # WEGEN NEU NOT NEEDED
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
@@ -132,17 +143,7 @@ class Game:
                     if event.key == K_RIGHT:
                         self.ship.step = 0
 
-                
-                # keys_pressed = pygame.key.get_pressed()
 
-                # NEU NOT NEEDED
-                
-                # Events durch gedrueckthalten
-                # if keys_pressed[pygame.K_LEFT]: 
-	            #     self.spieler.x -= VEL
-                # if keys_pressed[pygame.K_RIGHT]:
-	            #     self.spieler.x += VEL
-                
                     
                 # Durch schließen des Fensters wird running ebenfalls auf False gesetzt
                 elif event.type == QUIT:
@@ -152,6 +153,8 @@ class Game:
             self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
 
             self.ship.walk() # von MAIK
+
+            self.gegner.walk() # von Maik
 
             # dann kommt später:
             # self.gegner.walk()
