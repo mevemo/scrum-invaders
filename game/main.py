@@ -10,10 +10,9 @@ HOEHE = 720
 TITEL = "Space Invaders"
 SPACESHIP_WIDTH = 50
 SPACESHIP_HEIGHT = 50
-START_X =  (BREITE - SPACESHIP_WIDTH) / 2
-START_Y =HOEHE - SPACESHIP_HEIGHT -20
-
-VEL = 5
+START_X = 500
+START_Y = 500
+VEL = 10
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 FPS = 60
@@ -56,7 +55,7 @@ class Ship:
 
     def walk(self):
         """ Hier ist festgelegt wie sich das Ship bewegen darf """
-        if self.spieler.x + self.step > BREITE - 50:
+        if self.spieler.x + self.step > BREITE:
             self.spieler.x = 0
         elif self.spieler.x + self.step < 0:
             self.spieler.x = BREITE - SPACESHIP_WIDTH
@@ -68,25 +67,9 @@ class Ship:
 
 
 class Gegner:
-    def __init__(self, parent_screen):
-        self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
-        self.step = 10
-        self.parent_screen = parent_screen
-    
-    def walk(self):
-        for ding in self.list:
-            ding[1] += self.step
-        self.draw()
-    
-    def draw():
-        pass
-
-        # for i in range(8):
-            # die ersten 4 haben die gleichen y werte
+    pass
 
 
-     # for ding in liste:
-       #   ´zeichne.ding.(x,y)       
 
 class Game:
     def __init__(self):
@@ -107,6 +90,17 @@ class Game:
         
 	    # pygame.display.flip()         # Uebertraegt dann die Aenderung auf das Display
 
+    #Bullets Variablen
+    BULLET = pygame.image.load("bullet1.png")
+    BULLET_X = 0
+    BULLET_Y = 50
+    
+    #Bullets Klasse 
+    class Bullet():
+        
+            
+    
+    
        
     def run(self):
         running = True
@@ -125,14 +119,13 @@ class Game:
                     # Rechter Pfeil verursacht Bewegung nach links
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
+                    # Bullets schiessen
+                    if event.key == K_SPACE:
+                        bullet = pygame.Rect(SPACESHIP_HEIGHT, SPACESHIP_WIDTH)
+                        bullet.append('bullet1.png')
+                       
                         
-                if event.type == KEYUP:
-                    if event.key == K_LEFT:
-                        self.ship.step = 0
-                    if event.key == K_RIGHT:
-                        self.ship.step = 0
-
-                
+   
                 # keys_pressed = pygame.key.get_pressed()
 
                 # NEU NOT NEEDED
