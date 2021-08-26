@@ -345,11 +345,7 @@ class Game:
                 self.bonus.list[0] = 1
 
             # Bonus Schiff Malen
-<<<<<<< HEAD
             if self.bonus is not None:
-=======
-            if self.bonus.list[0] > 0:
->>>>>>> 4c2f2b1e6f51c28449db6ee7e843664a878651f1
                 self.bonus.walk()
 
 
