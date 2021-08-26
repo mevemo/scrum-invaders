@@ -22,6 +22,8 @@ VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
+#game_over = pygame.image.load('gameover.png')
+game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
 FPS = 60
 bullets = []
 # gegner_speed = 1
@@ -141,7 +143,7 @@ class Game:
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
-        self.gegner_speed = 1
+        self.gegner_speed = 10
 
         self.ship = Ship(self.surface)
         self.gegner = Gegner(self.surface, self.gegner_speed)
@@ -232,16 +234,12 @@ class Game:
             for jener_gegner in self.gegner.list:
                 
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
-
-                    jener_gegner[0] -= 1
-                   
-                    if self.ship.hp == 1:
-                        running = False    
-                    else:
-                        self.ship.hp = 1   
+                    print (self.ship.hp)
+                    self.ship.hp = 0
+                    print (self.ship.hp)
                 
                 if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT:
-                    running = False
+                    self.surface.blit(game_over, (0, 0))
 
                 if jener_gegner[0] > 0:
                     alive = True
@@ -250,7 +248,9 @@ class Game:
                 self.gegner_speed += 2
                 game.gegner = Gegner(self.surface, self.gegner_speed)
 
-
+            if self.ship.hp <= 0:
+                
+                self.surface.blit(game_over, (0, 0))
 
 
                 
