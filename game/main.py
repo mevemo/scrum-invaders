@@ -219,6 +219,8 @@ class Game:
                 
                 for jener_gegner in self.gegner.list:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
+                        explosionSound = pygame.mixer.Sound("explosion.wav")
+                        explosionSound.play()
                         # pygame.event.post(pygame.event.Event(RED_HIT))
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
@@ -232,7 +234,7 @@ class Game:
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
 
                     jener_gegner[0] -= 1
-
+                   
                     if self.ship.hp == 1:
                         running = False    
                     else:
