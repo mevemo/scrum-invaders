@@ -153,20 +153,20 @@ class Bonus_Ship:
     def __init__(self, parent_screen):
         self.step = 2
         self.surface = parent_screen
-        self.list = [2, pygame.Rect(0, 0, 45, 45)]
+        self.list = [0, pygame.Rect(0, 0, 45, 45)]
     
     def walk(self):
-        self.list[1].x += self.step
-        # if self.list[1].x + 35 + self.step > BREITE:
-        #     self.list[1].x = 0
-        # else:
-        #     self.list[1].x += self.step
+        if self.list[1].x + 35 + self.step > BREITE:
+            self.list[1].x = 0
+        else:
+            self.list[1].x += self.step
         
 
         self.draw()
         
     def draw(self):
-	    self.surface.blit(BONUSSHIP, (self.list[1].x, self.list[1].y))
+	    if self.list[0] > 0:
+            self.surface.blit(BONUSSHIP, (self.list[1].x, self.list[1].y))
         
         
         
@@ -340,8 +340,8 @@ class Game:
             self.deckung.draw()
             
             # Bonus Schiff Malen
-            
-            self.bonus.walk()
+            if self.score_value > 5:
+                self.bonus.walk()
 
 
             for bullet in bullets:
@@ -372,8 +372,7 @@ class Game:
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             #alles neu macht der mai
             alive = False
-            if self.score_value > 5:
-                game.bonus = Bonus_Ship(self.surface)
+
                 
 
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
