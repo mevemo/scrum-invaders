@@ -221,7 +221,7 @@ class Game:
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
-
+            #alles neu macht der mai
             alive = False
 
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
