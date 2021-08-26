@@ -21,6 +21,7 @@ COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
 bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
+AMMO = 3
          # ↓ Wird für Startmenu gebraucht ↓
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -283,7 +284,7 @@ class Game:
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
                     # Leertaste schiesst Kugeln
-                    if event.key == K_SPACE:
+                    if event.key == K_SPACE and len(bullets) <= AMMO:
                         bulletSound = pygame.mixer.Sound("laser.wav")
                         bulletSound.play()
                         bullet = pygame.Rect(self.ship.spieler.x +12 , self.ship.spieler.y, 10, 10)
@@ -343,7 +344,7 @@ class Game:
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
                 
-                if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
+                if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] >= 0:
                     # print (self.ship.hp)
                     bulletSound = pygame.mixer.Sound("explosion.wav")
                     bulletSound.play()
