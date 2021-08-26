@@ -408,7 +408,7 @@ class Game:
                 
                 self.surface.blit(game_over, (0, 0))
 
-
+            
                 
             # dann kommt später:
             # self.gegner.walk()
