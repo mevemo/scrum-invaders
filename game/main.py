@@ -34,6 +34,7 @@ BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bulle
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
 FPS = 60
 bullets = []
+gegner_bullets = []
 # gegner_speed = 1
 
 # Spieltitel und Icon
@@ -156,19 +157,15 @@ class Bonus_Ship:
         self.list = [2, pygame.Rect(0, 0, 65, 65)]
     
     def walk(self):
-       #if self.list[1].x + 35 + self.step > BREITE:
-       #     self.list[1].x = 0
-       # else:
-        self.list[1].x += self.step
-        
-
+        if self.list[1].x + 35 + self.step > BREITE:
+            self.list[1].x = 0
+        else:
+            self.list[1].x += self.step        
         self.draw()
         
     def draw(self):
-	    self.surface.blit(BONUSSHIP, (self.list[1].x, self.list[1].y))
-        
-        
-        
+        self.surface.blit(BONUSSHIP, (self.list[1].x, self.list[1].y))
+
 class Gegner:
     def __init__(self, parent_screen, speed):
         self.list = []
@@ -211,7 +208,9 @@ class Gegner:
         # ab y = 101 ist wieder die oberste bedingung erfüllt und es geht von vorne los
         
         self.count += 1
-    
+
+        if self.count % 40 == 0:
+            gegner_bullets.append
         # self.kurz_image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
 
         # if self.count % 2 == 0:
@@ -337,8 +336,16 @@ class Game:
             # Deckung malen:
             self.deckung.draw()
             
+            # Bonus Schiff kommt in's Spiel 
+            if self.score_value % 9 == 0 and self.score_value != 0:
+                self.bonus.list[0] = 1
+
             # Bonus Schiff Malen
+<<<<<<< HEAD
             if self.bonus is not None:
+=======
+            if self.bonus.list[0] > 0:
+>>>>>>> 4c2f2b1e6f51c28449db6ee7e843664a878651f1
                 self.bonus.walk()
 
 
