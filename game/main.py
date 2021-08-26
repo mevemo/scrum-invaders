@@ -21,6 +21,7 @@ BULLET_VEL = 10
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
+BONUSSHIP = pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (35, 35))
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
@@ -32,6 +33,20 @@ bullets = []
 pygame.display.set_caption(TITEL)
 icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
+
+# Score
+
+score_value = 0
+font = pygame.font.Font('freesansbold.ttf', 32)
+
+textX = 10
+testY = 10
+
+
+def show_score(x, y):
+    score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
+    screen.blit(score, (x, y))
+
 
 # Löst das Abspielen der Musik aus
 #START_MUSIC.play()
@@ -237,6 +252,7 @@ class Game:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
                         explosionSound.play()
+                        score_value += 1
                         # pygame.event.post(pygame.event.Event(RED_HIT))
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
@@ -270,7 +286,7 @@ class Game:
                 
             # dann kommt später:
             # self.gegner.walk()
-
+            show_score(textX, testY)
             # RESRESH
             pygame.display.flip()
 
