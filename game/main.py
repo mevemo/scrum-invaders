@@ -36,16 +36,16 @@ pygame.display.set_icon(icon)
 
 # Score
 
-score_value = 0
-font = pygame.font.Font('freesansbold.ttf', 32)
+# score_value = 0
+# font = pygame.font.Font('freesansbold.ttf', 32)
 
-textX = 10
-testY = 10
+# textX = 10
+# testY = 10
 
 
-def show_score(x, y):
-    score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
-    screen.blit(score, (x, y))
+# def show_score(x, y):
+#     score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
+#     screen.blit(score, (x, y))
 
 
 # Löst das Abspielen der Musik aus
@@ -252,7 +252,7 @@ class Game:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
                         explosionSound.play()
-                        score_value += 1
+                        # score_value += 1
                         # pygame.event.post(pygame.event.Event(RED_HIT))
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
@@ -286,7 +286,7 @@ class Game:
                 
             # dann kommt später:
             # self.gegner.walk()
-            show_score(textX, testY)
+            # show_score(textX, testY)
             # RESRESH
             pygame.display.flip()
 
