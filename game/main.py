@@ -28,7 +28,7 @@ AMMO = 3
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (45, 45)), 90)
+BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 45)
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
@@ -154,7 +154,7 @@ class Bonus_Ship:
     def __init__(self, parent_screen):
         self.step = 2
         self.surface = parent_screen
-        self.list = [0, pygame.Rect(0, 0, 45, 45)]
+        self.list = [2, pygame.Rect(0, 0, 65, 65)]
     
     def walk(self):
         if self.list[1].x + 35 + self.step > BREITE:
@@ -249,12 +249,11 @@ class Game:
         # Initialisiert Pygame:
         pygame.init()
         
-        
+        self.bonus = None
 
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
-        self.bonus = Bonus_Ship(self.surface)
         self.gegner_speed = 1
 
         self.ship = Ship(self.surface)
@@ -342,7 +341,11 @@ class Game:
                 self.bonus.list[0] = 1
 
             # Bonus Schiff Malen
+<<<<<<< HEAD
+            if self.bonus is not None:
+=======
             if self.bonus.list[0] > 0:
+>>>>>>> 4c2f2b1e6f51c28449db6ee7e843664a878651f1
                 self.bonus.walk()
 
 
@@ -374,7 +377,8 @@ class Game:
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             #alles neu macht der mai
             alive = False
-
+            if self.score_value > 5:
+                game.bonus = Bonus_Ship(self.surface)
                 
 
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
