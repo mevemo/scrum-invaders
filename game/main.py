@@ -130,7 +130,8 @@ class Gegner:
             if ding[0] != 0:
                 pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
-
+class Deckung:
+    pass
 
 class Game:
     def __init__(self):
