@@ -231,9 +231,9 @@ class Game:
             for jener_gegner in self.gegner.list:
                 
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
-                    print (self.ship.hp)
+                    print ('hp = 'self.ship.hp)
                     self.ship.hp = 0
-                    print (self.ship.hp)
+                    print ('hp = 'self.ship.hp)
                 
                 if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT:
                     self.surface.blit(game_over, (0, 0))
