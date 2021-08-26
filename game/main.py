@@ -16,6 +16,7 @@ GEGNER_HEIGHT = 50
 START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
+COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
 bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
@@ -99,11 +100,11 @@ class Gegner:
         self.list = []
         for i in range(50):
             if i < 12:
-                self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
+                self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
             elif i < 24:
-                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
+                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
             elif i < 36:
-                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
+                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
         self.step = speed
@@ -136,14 +137,21 @@ class Gegner:
         # ab y = 101 ist wieder die oberste bedingung erfüllt und es geht von forne los
         
         self.count += 1
-        
+    
+        # self.kurz_image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
+
+        # if self.count % 2 == 0:
+        #     self.kurz_image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
+
         self.draw()
     
     def draw(self):
         for ding in self.list:
             # self.parent_screen.blit(self.image, (ding[1], ding[2]))
             if ding[0] != 0:
-                pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
+                # pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
+                
+                self.parent_screen.blit(ding[2], (ding[1].x, ding[1].y))
 
 class Deckung:
     def __init__(self, parent_screen):
@@ -155,8 +163,12 @@ class Deckung:
 
     def draw(self):
         for ding in self.list:
-            if ding[0] != 0:
-                pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, 256, 100))
+            if ding[0] == 1:
+                pygame.draw.rect(self.parent_screen,COLORS[0],(ding[1].x, ding[1].y, 256, 100))
+            elif ding[0] == 2:
+                pygame.draw.rect(self.parent_screen,COLORS[1],(ding[1].x, ding[1].y, 256, 100))
+            elif ding[0] == 3:
+                pygame.draw.rect(self.parent_screen,COLORS[2],(ding[1].x, ding[1].y, 256, 100))
 
 
 class Game:
@@ -256,6 +268,16 @@ class Game:
                         # pygame.event.post(pygame.event.Event(RED_HIT))
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
+
+                for element in self.deckung.list:
+                    if element[1].colliderect(bullet) and element[0] > 0:
+                        explosionSound = pygame.mixer.Sound("explosion.wav")
+                        explosionSound.play()
+                        bullets.remove(bullet)
+                        element[0] -= 1
+
+
+
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             #alles neu macht der mai
             alive = False
@@ -264,10 +286,20 @@ class Game:
             for jener_gegner in self.gegner.list:
                 
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
-                    print (self.ship.hp)
+                    # print (self.ship.hp)
+                    bulletSound = pygame.mixer.Sound("explosion.wav")
+                    bulletSound.play()
                     self.ship.hp = 0
-                    print (self.ship.hp)
-                
+                    # print(f"Die Restlichen HP sind: {self.ship.hp}")  
+
+
+                for element in self.deckung.list:
+                    if jener_gegner[1].colliderect(element[1]) and jener_gegner[0] > 0 and element[0] > 0:
+                        element[0] -= 1
+                        jener_gegner[0] -= 1
+                        bulletSound = pygame.mixer.Sound("explosion.wav")
+                        bulletSound.play()
+
                 if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT:
                     self.surface.blit(game_over, (0, 0))
 
