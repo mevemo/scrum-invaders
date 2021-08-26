@@ -63,13 +63,13 @@ def draw_text(surface, text, size, x, y, color):
 # ↓ DIMI START MENU ↓
 def menu():
 
-    title = pygame.image.load(startmenutitel.png').convert_alpha()
+    title = pygame.image.load('startmenutitel.png').convert_alpha()
     title = pygame.transform.scale(title, (BREITE, 81 * 2))
 
 
-    arrow_keys = pygame.image.load(move.png').convert_alpha()
+    arrow_keys = pygame.image.load('move.png').convert_alpha()
     arrow_keys = pygame.transform.scale(arrow_keys, (150, 85))
-    spacebar = pygame.image.load(shoot.png').convert_alpha()
+    spacebar = pygame.image.load('shoot.png').convert_alpha()
     spacebar = pygame.transform.scale(spacebar, (150, 50))
  
     DISPLAY.blit(title, (0,20))
