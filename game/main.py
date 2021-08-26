@@ -380,7 +380,7 @@ class Game:
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
                 
-                if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] >= 0:
+                if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
                     # print (self.ship.hp)
                     bulletSound = pygame.mixer.Sound("explosion.wav")
                     bulletSound.play()
@@ -395,7 +395,7 @@ class Game:
                         bulletSound = pygame.mixer.Sound("explosion.wav")
                         bulletSound.play()
 
-                if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT:
+                if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT and jener_gegner[0] > 0:
                     self.surface.blit(game_over, (0, 0))
 
                 if jener_gegner[0] > 0:
