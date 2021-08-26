@@ -91,7 +91,7 @@ class Gegner:
                 self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
-        self.step = 5
+        self.step = 1
         self.parent_screen = parent_screen
         self.count = 0
     
@@ -219,8 +219,11 @@ class Game:
                         jener_gegner[0] = 0
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
 
+            alive = False
+
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
+                
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
 
                     jener_gegner[0] -= 1
@@ -228,7 +231,14 @@ class Game:
                     if self.ship.hp == 1:
                         running = False    
                     else:
-                        self.ship.hp -= 1   
+                        self.ship.hp = 1   
+                
+                if jener_gegner[0] > 0:
+                    alive = True
+                
+            if alive == False:
+                game.gegner = Gegner(self.surface)
+
 
 
 
