@@ -25,7 +25,7 @@ VEL = 5
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BONUSSHIP = pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (35, 35))
+BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (45, 45)), 90)
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
@@ -143,7 +143,27 @@ class Ship:
 
         self.draw()
 
+#Bonus Schiff
+class Bonus_Ship:
+    def __init__(self, parent_screen):
+        self.step = 2
+        self.surface = parent_screen
+        self.list = [2, pygame.Rect(0, 0, 45, 45)]
+    
+    def walk(self):
+        if self.list[1].x + 35 + self.step > BREITE:
+            self.list[1].x = 0
+        else:
+            self.list[1].x += self.step
+        
 
+        self.draw()
+        
+    def draw(self):
+	    self.surface.blit(BONUSSHIP, (self.list[1].x, self.list[1].y))
+        
+        
+        
 class Gegner:
     def __init__(self, parent_screen, speed):
         self.list = []
@@ -224,6 +244,8 @@ class Game:
     def __init__(self):
         # Initialisiert Pygame:
         pygame.init()
+        
+        self.bonus = None
 
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
@@ -234,7 +256,7 @@ class Game:
         self.gegner = Gegner(self.surface, self.gegner_speed)
         self.deckung = Deckung(self.surface)
        
-
+        self.score_value = 0
         # WEGEN NEU NOT NEEDED
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
         # self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT) 
@@ -309,6 +331,10 @@ class Game:
 
             # Deckung malen:
             self.deckung.draw()
+            
+            # Bonus Schiff Malen
+            if self.bonus is not None:
+                self.bonus.walk()
 
 
             for bullet in bullets:
@@ -322,7 +348,7 @@ class Game:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
                         explosionSound.play()
-                        # score_value += 1
+                        self.score_value += 1
                         # pygame.event.post(pygame.event.Event(RED_HIT))
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
@@ -339,6 +365,9 @@ class Game:
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             #alles neu macht der mai
             alive = False
+            if self.score_value > 5:
+                game.bonus = Bonus_Ship(self.surface)
+                
 
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
