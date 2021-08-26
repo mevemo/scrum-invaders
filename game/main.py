@@ -187,6 +187,8 @@ class Game:
                         self.ship.step = VEL    
                     # Leertaste schiesst Kugeln
                     if event.key == K_SPACE:
+                        bulletSound = pygame.mixer.Sound("laser.wav")
+                        bulletSound.play()
                         bullet = pygame.Rect(self.ship.spieler.x +12 , self.ship.spieler.y, 10, 10)
                         bullets.append(bullet)
                         
