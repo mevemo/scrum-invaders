@@ -56,6 +56,8 @@ class Ship:
 	    # Setzt die Schrittweite (Die Bewegung des Schiffs) am Anfang auf Null
         self.step = 0
 
+        self.hp = 3
+
     def draw(self):
 	    # """ Mit dieser Methode kann ein Schiff sich auf dem zugeordneten Bildschirm zeichnen"""
         # Das Bild wird dem Screen hinzugefügt
@@ -220,7 +222,13 @@ class Game:
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
-                    running = False       
+
+                    jener_gegner[0] -= 1
+
+                    if self.ship.hp == 1:
+                        running = False    
+                    else:
+                        self.ship.hp -= 1   
 
 
 
