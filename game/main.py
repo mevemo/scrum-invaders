@@ -210,7 +210,11 @@ class Gegner:
         self.count += 1
 
         if self.count % 40 == 0:
-            gegner_bullets.append
+            bulletSound = pygame.mixer.Sound("laser.wav")
+            bulletSound.play()
+            ballermann = random.randint(1, len(self.list)-1)
+            bullet = pygame.Rect(self.list[ballermann][1].x + 25 , self.list[ballermann][1].y +50, 10, 10)
+            gegner_bullets.append(bullet)
         # self.kurz_image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
 
         # if self.count % 2 == 0:
@@ -346,12 +350,41 @@ class Game:
                 self.bonus.walk()
 
 
+            # Hier handeln wir die fliegenden Bullets vom random-gegner ballermann
+            for bullet in gegner_bullets:
+            
+                # Prüfung ob sie in die Deckung knallt
+                for element in self.deckung.list:
+                    if element[1].colliderect(bullet) and element[0] > 0:
+                        explosionSound = pygame.mixer.Sound("explosion.wav")
+                        explosionSound.play()
+                        gegner_bullets.remove(bullet)
+                        element[0] -= 1
+
+                # Wenn die Kugel das schiff trifft
+                if self.ship.spieler.colliderect(bullet):
+                        explosionSound = pygame.mixer.Sound("explosion.wav")
+                        explosionSound.play()
+                        self.ship.hp -= 1
+                        gegner_bullets.remove(bullet)
+
+                # Wenn sie noch in Spielfeld bleibt, fliegt sie weiter
+                if bullet.y + BULLET_VEL < HOEHE:
+                    bullet.y += BULLET_VEL  
+                elif bullet.y + BULLET_VEL >= HOEHE: 
+                    gegner_bullets.remove(bullet)
+
+                # Zeichne die Kugel
+                self.surface.blit(BULLET, (bullet.x, bullet.y))
+
+            # Hier handeln wir die fliegenden Bullets vom SPACESHIP
             for bullet in bullets:
                 # pygame.draw.rect(self.surface, BLUE, bullet)
                 if bullet.y - BULLET_VEL > 0:
                     bullet.y -= BULLET_VEL  
                 else: 
                     bullets.remove(bullet)
+                
                 
                 for jener_gegner in self.gegner.list:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
