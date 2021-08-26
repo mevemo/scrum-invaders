@@ -3,6 +3,8 @@ from pygame.locals import *
 import time
 import random
 import sys
+import turtle
+from turtle import textinput
 
 pygame.mixer.init()		# Brauchen wir fuer Sound
 
@@ -38,6 +40,8 @@ pygame.display.set_caption(TITEL)
 icon = pygame.image.load("ufo.png")
 pygame.display.set_icon(icon)
 
+# Eingabe des Spielernamens
+Spielername = textinput("Name", "Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames (Modifiziert)
 # Score
 
 # score_value = 0
@@ -62,7 +66,7 @@ def draw_text(surface, text, size, x, y, color):
 	
 # ↓ DIMI START MENU ↓
 def menu():
-
+    turtle.bye()
     title = pygame.image.load('startmenutitel.png').convert_alpha()
     title = pygame.transform.scale(title, (BREITE, 81 * 2))
 
@@ -73,13 +77,14 @@ def menu():
     spacebar = pygame.transform.scale(spacebar, (150, 50))
  
     DISPLAY.blit(title, (0,20))
-    DISPLAY.blit(arrow_keys, ((BREITE/2) - 80, 410))
-    DISPLAY.blit(spacebar, ((BREITE/2) - 80, 565))
-    draw_text(DISPLAY, "DRUCK ENTER", 80, BREITE/2, (HOEHE/2) - 100, (30,144,255))
-    draw_text(DISPLAY, "Q TO QUIT", 35, BREITE/2, (HOEHE/2) + 270, (30,144,255))
+    DISPLAY.blit(arrow_keys, ((BREITE/2) - 80, 490))
+    DISPLAY.blit(spacebar, ((BREITE/2) - 80, 610))
+    draw_text(DISPLAY, "WILLKOMMEN " + Spielername, 50, BREITE/2, (HOEHE/2) - 140, (30,144,255))
+    draw_text(DISPLAY, "DRUCK ENTER", 90, BREITE/2, (HOEHE/2) - 50, (30,144,255))
+    draw_text(DISPLAY, "Q TO QUIT", 40, BREITE/2, (HOEHE/2) + 305, (30,144,255))
 
-    draw_text(DISPLAY, "MOVE:", 35, BREITE/2, 400, (30,144,255))
-    draw_text(DISPLAY, "SHOOT:", 35, BREITE/2, 516, (30,144,255))
+    draw_text(DISPLAY, "MOVE:", 35, BREITE/2, 495, (30,144,255))
+    draw_text(DISPLAY, "SHOOT:", 35, BREITE/2, 575, (30,144,255))
  
     pygame.display.update()
  
@@ -101,8 +106,7 @@ def menu():
 # Löst das Abspielen der Musik aus
 #START_MUSIC.play()
 
-# Eingabe des Spielernamens
-Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
+
 
 def draw_bg(parent_screen):
     parent_screen.blit(bg, (0, 0))
