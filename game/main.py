@@ -155,7 +155,7 @@ class Bonus_Ship:
         self.step = 2
         self.hp = 0
         self.surface = parent_screen
-        self.list = [2, pygame.Rect(0, 0, 65, 65)]
+        self.list = [0, pygame.Rect(0, 0, 65, 65)]
     
     def walk(self):
         if self.list[1].x + 35 + self.step > BREITE:
@@ -257,7 +257,7 @@ class Game:
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
-        # Erschafft ein Bonus Shuip mit 0 HP
+        # Erschafft ein Bonus Shuip mit 0 HP im Hintergrund für später
         self.bonus = Bonus_Ship(self.surface)
         
         self.gegner_speed = 1
@@ -347,7 +347,7 @@ class Game:
                 self.bonus.hp = 1
 
             # Bonus Schiff Malen
-            if self.bonus is not None:
+            if self.bonus.hp > 0:
                 self.bonus.walk()
 
 
@@ -409,9 +409,7 @@ class Game:
             #alles neu macht der mai
             alive = False
 
-            # Hier wird das Bonus_Ship belebt
-            if self.score_value > 5:
-                game.bonus = Bonus_Ship(self.surface)
+
                 
 
             # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
@@ -454,7 +452,7 @@ class Game:
             # RESRESH
             pygame.display.flip()
 
-            # Mach ma Halblang wurde durch FPW ersetzt
+            # Mach ma Halblang wurde durch FPS ersetzt
             # time.sleep(0.2)
 
 
