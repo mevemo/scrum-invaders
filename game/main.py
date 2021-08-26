@@ -42,7 +42,6 @@ Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des 
 def draw_bg(parent_screen):
     parent_screen.blit(bg, (0, 0))
 
-# Ab hier von MAIK
 class Ship:
     """ Hier wird die ship-klasse definiert """
     def __init__(self, parent_screen):
@@ -78,13 +77,11 @@ class Ship:
             self.spieler.x += self.step
 
         self.draw()
-# bis hier von MAIK
 
 
 class Gegner:
     def __init__(self, parent_screen, speed):
-        # self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
-        self.list= []
+        self.list = []
         for i in range(50):
             if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
