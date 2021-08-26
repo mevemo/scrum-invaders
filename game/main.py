@@ -48,9 +48,9 @@ pygame.display.set_icon(icon)
 
 
 
-def show_score(x, y):
-    score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
-    screen.blit(score, (x, y))
+# def show_score(x, y):
+#     score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
+#     screen.blit(score, (x, y))
 	
 	# ↓ Damit können wir etwas schreiben ↓
 def draw_text(surface, text, size, x, y, color):
@@ -256,11 +256,10 @@ class Game:
     
            
     def run(self):
-	running = True
-                     # ↓ DIMI MENU def run ↓
-        show_menu = True
-				 
+        running = True
         clock = pygame.time.Clock()
+        show_menu = True
+
         while running: 
             clock.tick(FPS)
             draw_bg(self.surface)
