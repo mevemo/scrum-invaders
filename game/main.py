@@ -240,6 +240,9 @@ class Game:
                     else:
                         self.ship.hp = 1   
                 
+                if jener_gegner[1].y > HOEHE - GEGNER_HEIGHT:
+                    running = False
+
                 if jener_gegner[0] > 0:
                     alive = True
                 
