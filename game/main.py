@@ -134,7 +134,7 @@ class Gegner:
         else:
             for ding in self.list:
                 ding[1].y += self.step
-        # ab y = 101 ist wieder die oberste bedingung erfüllt und es geht von forne los
+        # ab y = 101 ist wieder die oberste bedingung erfüllt und es geht von vorne los
         
         self.count += 1
     
