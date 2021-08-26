@@ -131,7 +131,18 @@ class Gegner:
                 pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
 class Deckung:
-    pass
+    def __init__(self, parent_screen):
+        self.list = []
+        self.list.append([3, pygame.Rect(128, 500, 256, 100)])
+        self.list.append([3, pygame.Rect(512, 500, 256, 100)])
+        self.list.append([3, pygame.Rect(914, 500, 256, 100)])
+        self.parent_screen = parent_screen
+
+    def draw(self):
+        for ding in self.list:
+            if ding[0] != 0:
+                pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, 256, 100))
+
 
 class Game:
     def __init__(self):
@@ -145,6 +156,7 @@ class Game:
 
         self.ship = Ship(self.surface)
         self.gegner = Gegner(self.surface, self.gegner_speed)
+        self.deckung = Deckung(self.surface)
        
 
         # WEGEN NEU NOT NEEDED
@@ -209,6 +221,10 @@ class Game:
 
             # Gegnerbewegung wird ausgelöst
             self.gegner.walk()
+
+            # Deckung malen:
+            self.deckung.draw()
+
 
             for bullet in bullets:
                 # pygame.draw.rect(self.surface, BLUE, bullet)
