@@ -36,8 +36,8 @@ pygame.display.set_icon(icon)
 # Eingabe des Spielernamens
 Spielername = input("Bitte Spielername eingeben: ") # Marcin Chris, Eingabe des Spielernames
 
-def draw_bg():
-    Display.blit(bg, (0, 0))
+def draw_bg(parent_screen):
+    parent_screen.blit(bg, (0, 0))
 
 # Ab hier von MAIK
 class Ship:
@@ -55,6 +55,8 @@ class Ship:
 	
 	    # Setzt die Schrittweite (Die Bewegung des Schiffs) am Anfang auf Null
         self.step = 0
+
+        self.hp = 3
 
     def draw(self):
 	    # """ Mit dieser Methode kann ein Schiff sich auf dem zugeordneten Bildschirm zeichnen"""
@@ -89,39 +91,46 @@ class Gegner:
                 self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
-        self.step = 1
+        self.step = 5
         self.parent_screen = parent_screen
         self.count = 0
     
     def walk(self):
         
-        if self.count //10 % 2 == 0:
+        # aaaaaalso:  Wenn es noch nicht am rechten Rand ist und y weniger als 55 pixel gelaufen ist (also rest nach y/100), wandert es x plus einen step also nach rechts
+        # da es % 100 gerechnet wird zählt es jeweils für bis 55, bis 155, bis 255, ect
+        if self.list[11][1].x < BREITE - 50 and self.list[11][1].y % 100 < 55:
             for ding in self.list:
                 ding[1].x += self.step
+
+        # wenn es dann noch nicht 55 pixel weit runter gegangen ist geht es immer y plus einen step nach unten
+        # da es % 100 gerechnet wird zählt es für bis 55, bis 155, bis 255, ect
+        elif self.list[11][1].y % 100 < 55:
+            for ding in self.list:
                 ding[1].y += self.step
 
-        else:
+        # wenn es dann noch nicht am linken rand ist, wandert es dann immer x minus einen step, also nach links
+        elif self.list[0][1].x > 0:
             for ding in self.list:
                 ding[1].x -= self.step
-                ding[1].y += self.step
 
+        # sonst wandert es nach unten
+        else:
+            for ding in self.list:
+                ding[1].y += self.step
+        # ab y = 101 ist wieder die oberste bedingung erfüllt und es geht von forne los
         
-            self.count += 1
+        self.count += 1
         
         self.draw()
     
     def draw(self):
         for ding in self.list:
             # self.parent_screen.blit(self.image, (ding[1], ding[2]))
-            pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
+            if ding[0] != 0:
+                pygame.draw.rect(self.parent_screen,BLUE,(ding[1].x, ding[1].y, GEGNER_WIDTH, GEGNER_HEIGHT,))
 
 
-# Schiessen Kugel
-class Bullet():
-    def __init__(self):
-        #pygame.Rect('bullet1.png')
-        pass
-        
 
 class Game:
     def __init__(self):
@@ -160,7 +169,7 @@ class Game:
         clock = pygame.time.Clock()
         while running: 
             clock.tick(FPS)
-	    draw_bg()
+            draw_bg(self.surface)
             for event in pygame.event.get():
                 # Events durch Runterdruecken:
                 if event.type == KEYDOWN:
@@ -190,12 +199,11 @@ class Game:
                 elif event.type == QUIT:
                     running = False
 
-            # Male das alte Bild über
-            #self.surface.fill((10,10,10)) # Würde eine Hintergrundfarbe bestimmen
+            # Schiffbewegung wird ausgelöst
+            self.ship.walk() 
 
-            self.ship.walk() # von MAIK
-
-            self.gegner.walk() # von Maik
+            # Gegnerbewegung wird ausgelöst
+            self.gegner.walk()
 
             for bullet in bullets:
                 # pygame.draw.rect(self.surface, BLUE, bullet)
@@ -203,7 +211,28 @@ class Game:
                     bullet.y -= BULLET_VEL  
                 else: 
                     bullets.remove(bullet)
+                
+                for jener_gegner in self.gegner.list:
+                    if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
+                        # pygame.event.post(pygame.event.Event(RED_HIT))
+                        bullets.remove(bullet)
+                        jener_gegner[0] = 0
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
+
+            # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
+            for jener_gegner in self.gegner.list:
+                if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
+
+                    jener_gegner[0] -= 1
+
+                    if self.ship.hp == 1:
+                        running = False    
+                    else:
+                        self.ship.hp -= 1   
+
+
+
+                
             # dann kommt später:
             # self.gegner.walk()
 
