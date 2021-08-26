@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import time
 import random
+import sys
 
 pygame.mixer.init()		# Brauchen wir fuer Sound
 
@@ -19,6 +20,8 @@ BLUE = (100, 100, 100)
 bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
+         # ↓ Wird für Startmenu gebraucht ↓
+DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 BONUSSHIP = pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (35, 35))
@@ -46,6 +49,50 @@ testY = 10
 def show_score(x, y):
     score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
     screen.blit(score, (x, y))
+	
+	# ↓ Damit können wir etwas schreiben ↓
+def draw_text(surface, text, size, x, y, color):
+    font = pygame.font.Font(pygame.font.match_font('impact'), size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surface.blit(text_surface, text_rect)
+	
+# ↓ DIMI START MENU ↓
+def menu():
+
+    title = pygame.image.load(startmenutitel.png').convert_alpha()
+    title = pygame.transform.scale(title, (BREITE, 81 * 2))
+
+
+    arrow_keys = pygame.image.load(move.png').convert_alpha()
+    arrow_keys = pygame.transform.scale(arrow_keys, (150, 85))
+    spacebar = pygame.image.load(shoot.png').convert_alpha()
+    spacebar = pygame.transform.scale(spacebar, (150, 50))
+ 
+    DISPLAY.blit(title, (0,20))
+    DISPLAY.blit(arrow_keys, ((BREITE/2) - 80, 410))
+    DISPLAY.blit(spacebar, ((BREITE/2) - 80, 565))
+    draw_text(DISPLAY, "DRUCK ENTER", 80, BREITE/2, (HOEHE/2) - 100, (30,144,255))
+    draw_text(DISPLAY, "Q TO QUIT", 35, BREITE/2, (HOEHE/2) + 270, (30,144,255))
+
+    draw_text(DISPLAY, "MOVE:", 35, BREITE/2, 400, (30,144,255))
+    draw_text(DISPLAY, "SHOOT:", 35, BREITE/2, 516, (30,144,255))
+ 
+    pygame.display.update()
+ 
+    while True:
+        event = pygame.event.poll()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                break
+            elif event.key == pygame.K_q:
+                pygame.quit()
+                sys.exit()
+        elif event.type == QUIT:
+            pygame.quit()
+            sys.exit() 
+ # ↑ DIMI START MENU ↑	
 
 
 # Löst das Abspielen der Musik aus
@@ -195,11 +242,21 @@ class Game:
     
            
     def run(self):
-        running = True
+	running = True
+                     # ↓ DIMI MENU def run ↓
+        show_menu = True
+				 
         clock = pygame.time.Clock()
         while running: 
             clock.tick(FPS)
             draw_bg(self.surface)
+	# ↓ DIMI MENU While run Loop ↓ 
+            if show_menu:
+               menu()
+               pygame.time.delay(1500)
+               show_menu = False		 
+        # ↑ DIMI MENU While run Loop ↑
+				 
             for event in pygame.event.get():
                 # Events durch Runterdruecken:
                 if event.type == KEYDOWN:
