@@ -153,6 +153,7 @@ class Ship:
 class Bonus_Ship:
     def __init__(self, parent_screen):
         self.step = 2
+        self.hp = 0
         self.surface = parent_screen
         self.list = [2, pygame.Rect(0, 0, 65, 65)]
     
@@ -253,10 +254,11 @@ class Game:
         # Initialisiert Pygame:
         pygame.init()
         
-        self.bonus = None
-
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
+        
+        # Erschafft ein Bonus Shuip mit 0 HP
+        self.bonus = Bonus_Ship(self.surface)
         
         self.gegner_speed = 1
 
@@ -342,10 +344,10 @@ class Game:
             
             # Bonus Schiff kommt in's Spiel 
             if self.score_value % 9 == 0 and self.score_value != 0:
-                self.bonus.list[0] = 1
+                self.bonus.hp = 1
 
             # Bonus Schiff Malen
-            if self.bonus is not None:
+            if self.bonus.hp > 0:
                 self.bonus.walk()
 
 
@@ -406,6 +408,8 @@ class Game:
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
             #alles neu macht der mai
             alive = False
+
+            # Hier wird das Bonus_Ship belebt
             if self.score_value > 5:
                 game.bonus = Bonus_Ship(self.surface)
                 
