@@ -21,6 +21,7 @@ BULLET_VEL = 10
 VEL = 5
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
+BONUSSHIP = pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (35, 35))
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
