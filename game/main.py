@@ -140,7 +140,7 @@ class Game:
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
-        self.gegner_speed = 10
+        self.gegner_speed = 8
 
         self.ship = Ship(self.surface)
         self.gegner = Gegner(self.surface, self.gegner_speed)
