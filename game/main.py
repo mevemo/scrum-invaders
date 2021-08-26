@@ -156,10 +156,10 @@ class Bonus_Ship:
         self.list = [2, pygame.Rect(0, 0, 45, 45)]
     
     def walk(self):
-        if self.list[1].x + 35 + self.step > BREITE:
-            self.list[1].x = 0
-        else:
-            self.list[1].x += self.step
+       #if self.list[1].x + 35 + self.step > BREITE:
+       #     self.list[1].x = 0
+       # else:
+        self.list[1].x += self.step
         
 
         self.draw()
@@ -406,7 +406,7 @@ class Game:
                 
                 self.surface.blit(game_over, (0, 0))
 
-
+            
                 
             # dann kommt später:
             # self.gegner.walk()
