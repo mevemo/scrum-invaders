@@ -24,6 +24,7 @@ SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WID
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 FPS = 60
 bullets = []
+# gegner_speed = 1
 
 # Spieltitel und Icon
 pygame.display.set_caption(TITEL)
@@ -79,19 +80,19 @@ class Ship:
 
 
 class Gegner:
-    def __init__(self, parent_screen):
+    def __init__(self, parent_screen, speed):
         # self.list = [ [1, 5, 300], [1, 5, 500] , [1, 5, 700], [1, 5, 900] ]
         self.list= []
         for i in range(50):
             if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
-            elif i < 24:
-                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
-            elif i < 36:
-                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            # elif i < 24:
+            #     self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT)])
+            # elif i < 36:
+            #     self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT)])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
-        self.step = 1
+        self.step = speed
         self.parent_screen = parent_screen
         self.count = 0
     
@@ -140,8 +141,10 @@ class Game:
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
+        self.gegner_speed = 1
+
         self.ship = Ship(self.surface)
-        self.gegner = Gegner(self.surface)
+        self.gegner = Gegner(self.surface, self.gegner_speed)
        
 
         # WEGEN NEU NOT NEEDED
@@ -237,7 +240,8 @@ class Game:
                     alive = True
                 
             if alive == False:
-                game.gegner = Gegner(self.surface)
+                self.gegner_speed += 2
+                game.gegner = Gegner(self.surface, self.gegner_speed)
 
 
 
