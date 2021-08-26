@@ -187,7 +187,7 @@ class Game:
                         self.ship.step = VEL    
                     # Leertaste schiesst Kugeln
                     if event.key == K_SPACE:
-                        bullet = pygame.Rect(self.ship.spieler.x + 25, self.ship.spieler.y, 10, 10)
+                        bullet = pygame.Rect(self.ship.spieler.x +12 , self.ship.spieler.y, 10, 10)
                         bullets.append(bullet)
                         
                 if event.type == KEYUP:
