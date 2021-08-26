@@ -380,13 +380,13 @@ class Game:
 
             # Hier handeln wir die fliegenden Bullets vom SPACESHIP
             for bullet in bullets:
-                # pygame.draw.rect(self.surface, BLUE, bullet)
+                # Bewege die Bullet 
                 if bullet.y - BULLET_VEL > 0:
                     bullet.y -= BULLET_VEL  
                 else: 
                     bullets.remove(bullet)
                 
-                
+                # Prüft ob die Bullet des Schiffs einen Gegner trifft
                 for jener_gegner in self.gegner.list:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
@@ -396,6 +396,7 @@ class Game:
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
 
+                # Prüft ob eine Bullet des Schiffs die eigene Deckung trifft
                 for element in self.deckung.list:
                     if element[1].colliderect(bullet) and element[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
@@ -404,15 +405,14 @@ class Game:
                         element[0] -= 1
 
 
-
+                # Zeichne die Bullet
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
-            #alles neu macht der mai
-            alive = False
+            
+            # Einführen einer gegner_alive Variable um später zu checken ob alle Gegner tot sind
+            gegner_alive = False
 
 
-                
-
-            # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
+            # Hier checken wir ob ein gegner das Schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
                 
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
@@ -434,9 +434,9 @@ class Game:
                     self.surface.blit(game_over, (0, 0))
 
                 if jener_gegner[0] > 0:
-                    alive = True
+                    gegner_alive = True
                 
-            if alive == False:
+            if gegner_alive == False:
                 self.gegner_speed += 2
                 game.gegner = Gegner(self.surface, self.gegner_speed)
 
