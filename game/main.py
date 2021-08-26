@@ -79,7 +79,7 @@ class Ship:
 
 class Gegner:
     def __init__(self, parent_screen, speed):
-       
+        self.list = []
         for i in range(50):
             if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT)])
