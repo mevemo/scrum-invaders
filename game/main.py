@@ -156,10 +156,11 @@ class Bonus_Ship:
         self.list = [2, pygame.Rect(0, 0, 45, 45)]
     
     def walk(self):
-        if self.list[1].x + 35 + self.step > BREITE:
-            self.list[1].x = 0
-        else:
-            self.list[1].x += self.step
+        self.list[1].x += self.step
+        # if self.list[1].x + 35 + self.step > BREITE:
+        #     self.list[1].x = 0
+        # else:
+        #     self.list[1].x += self.step
         
 
         self.draw()
@@ -250,11 +251,12 @@ class Game:
         # Initialisiert Pygame:
         pygame.init()
         
-        self.bonus = None
+        
 
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
         
+        self.bonus = Bonus_Ship(self.surface)
         self.gegner_speed = 1
 
         self.ship = Ship(self.surface)
@@ -338,8 +340,8 @@ class Game:
             self.deckung.draw()
             
             # Bonus Schiff Malen
-            if self.bonus is not None:
-                self.bonus.walk()
+            
+            self.bonus.walk()
 
 
             for bullet in bullets:
