@@ -23,7 +23,7 @@ COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
 bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
-AMMO = 30
+AMMO = 3
          # ↓ Wird für Startmenu gebraucht ↓
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -175,10 +175,10 @@ class Gegner:
         for i in range(50):
             if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
-            # elif i < 24:
-            #     self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
-            # elif i < 36:
-            #     self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
+            elif i < 24:
+                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
+            elif i < 36:
+                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
         self.step = speed
