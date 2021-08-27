@@ -28,7 +28,7 @@ AMMO = 30
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 45)
+BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 22.5)
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
@@ -355,7 +355,15 @@ class Game:
                 self.bonus.hp = 1
 
             # Bonus Schiff Malen
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if self.bonus.list[0] > 0:
+=======
+            if self.bonus is not None:
+>>>>>>> dc3548113b643415fd8afa3fa14ae0f711a13a2c
+=======
             if self.bonus.hp > 0:
+>>>>>>> bfd0ae6b2050901d5c8c6c3a464590416166bb51
                 self.bonus.walk()
 
 
