@@ -1,11 +1,3 @@
-import pygame
-from pygame.locals import *
-import time
-import random
-import sys
-import turtle
-from turtle import textinput
-
 from kivy.app import App
 from kivy.metrics import dp
 from kivy.properties import StringProperty
@@ -16,6 +8,18 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.properties import StringProperty, BooleanProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
+
+
+
+import pygame
+from pygame.locals import *
+import time
+import random
+import sys
+import turtle
+from turtle import textinput
+
+
 
 pygame.mixer.init()		# Brauchen wir fuer Sound
 
@@ -32,7 +36,7 @@ START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
 COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
-#bg = pygame.image.load('bg.png')
+bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
 AMMO = 3
