@@ -106,7 +106,7 @@ def menu():
 
 
 # Löst das Abspielen der Musik aus
-#START_MUSIC.play()
+START_MUSIC.play()
 
 
 
