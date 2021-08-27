@@ -404,6 +404,11 @@ class Game:
                         bullets.remove(bullet)
                         element[0] -= 1
 
+                #Prüfe ob eine Bullet das Bonusship trifft
+                if self.bonus.list[1].colliderect(bullet) and self.bonus.hp > 0:
+                    self.ship.hp += 1
+                    self.bonus.hp = 0
+
 
                 # Zeichne die Bullet
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
