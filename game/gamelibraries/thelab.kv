@@ -1,0 +1,19 @@
+WidgetsExample:
+
+    <WidgetsExample>:
+
+        Slider:
+            id: my_slider
+            min:0
+            max:100
+            value:50
+            on_value: root.on_slider_value(self)
+            orientation: "vertical"
+            disable: not my_switch.active
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: str(int(my_slider.value))
+            ProgressBar:
+                max:100
+                value: my_slider.value

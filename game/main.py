@@ -32,13 +32,13 @@ START_X =  (BREITE - SPACESHIP_WIDTH) / 2
 START_Y =HOEHE - SPACESHIP_HEIGHT -20
 BLUE = (100, 100, 100)
 COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
-bg = pygame.image.load('bg.png')
+#bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
 AMMO = 3
          # ↓ Wird für Startmenu gebraucht ↓
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
-START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
+#START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 275)
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
@@ -48,7 +48,7 @@ FPS = 60
 bullets = []
 gegner_bullets = []
 # gegner_speed = 1
-#---------------------------------------------------------------------------------------------------------------#
+#------------------------------------------ Spiel Titel / Icons --------------------------------------------------------------------#
 
 # Spieltitel und Icon
 pygame.display.set_caption(TITEL)
@@ -121,7 +121,7 @@ def menu():
 #-------------------------------------------------Musik-----------------------------------------------------#
 
 # Löst das Abspielen der Musik aus
-START_MUSIC.play()
+#START_MUSIC.play()
 
 #----------------------------------------------Hintergrund--------------------------------------------------#
 
@@ -129,6 +129,20 @@ def draw_bg(parent_screen):
     parent_screen.blit(bg, (0, 0))
 
 #---------------------------------------------Klassen------------------------------------------------------#
+
+                                    ###Kivy einstellungen###
+
+class WidgetsExample(GridLayout):
+    count = 1
+    count_enabled = BooleanProperty(False)
+    my_text = StringProperty("1")
+    
+                                    ###Def Funktionen##
+    def on_slider_value(self, widget):
+        print("Slider: " + str(int(widget.value)))
+    
+
+
 class Ship:
     """ Hier wird die ship-klasse definiert """
     def __init__(self, parent_screen, ammo):
