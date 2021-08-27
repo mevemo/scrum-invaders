@@ -19,6 +19,7 @@ from kivy.uix.stacklayout import StackLayout
 
 pygame.mixer.init()		# Brauchen wir fuer Sound
 
+#------------------------------------VARIABLEN----------------------------------------------------------------#
 # Hier definieren wir feste Groessen für das Gesamte Spiel
 BREITE = 1280
 HOEHE = 720
@@ -47,6 +48,7 @@ FPS = 60
 bullets = []
 gegner_bullets = []
 # gegner_speed = 1
+#---------------------------------------------------------------------------------------------------------------#
 
 # Spieltitel und Icon
 pygame.display.set_caption(TITEL)
@@ -64,7 +66,7 @@ Spielername = textinput("Name", "Bitte Spielername eingeben: ") # Marcin Chris, 
 # testY = 10
 
 
-
+#--------------------------------------------------DRAW FONT-------------------------------------------------#
 # def show_score(x, y):
 #     score = pygame.font.render("Score : " + str(score_value), True, (255, 255, 255))
 #     screen.blit(score, (x, y))
@@ -76,7 +78,9 @@ def draw_text(surface, text, size, x, y, color):
     text_rect = text_surface.get_rect()
     text_rect.midtop = (x, y)
     surface.blit(text_surface, text_rect)
-	
+
+
+#---------------------------------------------------Menu-----------------------------------------------------#	
 # ↓ DIMI START MENU ↓
 def menu():
     turtle.bye()
@@ -114,16 +118,17 @@ def menu():
             sys.exit() 
  # ↑ DIMI START MENU ↑	
 
-
+#-------------------------------------------------Musik-----------------------------------------------------#
 
 # Löst das Abspielen der Musik aus
 START_MUSIC.play()
 
-
+#----------------------------------------------Hintergrund--------------------------------------------------#
 
 def draw_bg(parent_screen):
     parent_screen.blit(bg, (0, 0))
 
+#---------------------------------------------Klassen------------------------------------------------------#
 class Ship:
     """ Hier wird die ship-klasse definiert """
     def __init__(self, parent_screen, ammo):
@@ -304,7 +309,7 @@ class Game:
     #         elif bullet.x > WIDTH:
     #             yellow_bullets.remove(bullet)
 
-    
+    #----------------------------------------Loops------------------------------------------------------------#
            
     def run(self):
         running = True
