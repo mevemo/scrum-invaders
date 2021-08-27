@@ -115,7 +115,7 @@ def draw_bg(parent_screen):
 
 class Ship:
     """ Hier wird die ship-klasse definiert """
-    def __init__(self, parent_screen):
+    def __init__(self, parent_screen, ammo):
 	    # """ Diese Methode wird immer dann ausgeführt, wenn ein neues Ship erschaffen wird"""
         # Erzeugt ein Viereck das die Position und Groesse des SPACESHIP speichert
         self.spieler = pygame.Rect(START_X, START_Y, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
@@ -130,6 +130,8 @@ class Ship:
         self.step = 0
 
         self.hp = 3
+
+        self.ammo = ammo
 
     def draw(self):
 	    # """ Mit dieser Methode kann ein Schiff sich auf dem zugeordneten Bildschirm zeichnen"""
@@ -262,7 +264,7 @@ class Game:
         
         self.gegner_speed = 1
 
-        self.ship = Ship(self.surface)
+        self.ship = Ship(self.surface, AMMO)
         self.gegner = Gegner(self.surface, self.gegner_speed)
         self.deckung = Deckung(self.surface)
        
@@ -315,7 +317,7 @@ class Game:
                     if event.key == K_RIGHT:
                         self.ship.step = VEL    
                     # Leertaste schiesst Kugeln
-                    if event.key == K_SPACE and len(bullets) <= AMMO:
+                    if event.key == K_SPACE and len(bullets) <= self.ship.ammo:
                         bulletSound = pygame.mixer.Sound("laser.wav")
                         bulletSound.play()
                         bullet = pygame.Rect(self.ship.spieler.x +12 , self.ship.spieler.y, 10, 10)
@@ -440,9 +442,13 @@ class Game:
 
                 if jener_gegner[0] > 0:
                     gegner_alive = True
-                
+
+            # Abfrage ob alle gegner im aktuellen Level tot sind   
             if gegner_alive == False:
-                self.gegner_speed += 2
+                # Hier wird der Gegner mit schneller
+                self.gegner_speed += 1
+                # Hier wird die AMMO größer
+                self.ship.ammo += 3
                 game.gegner = Gegner(self.surface, self.gegner_speed)
 
             if self.ship.hp <= 0:
