@@ -175,10 +175,10 @@ class Gegner:
         for i in range(50):
             if i < 12:
                 self.list.append([1, pygame.Rect(50 + (i * 100), 5, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
-            elif i < 24:
-                self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
-            elif i < 36:
-                self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
+            # elif i < 24:
+            #     self.list.append([1, pygame.Rect(50 + ((i-12) * 100), 105, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
+            # elif i < 36:
+            #     self.list.append([1, pygame.Rect(50 + ((i-24) * 100), 205, GEGNER_WIDTH, GEGNER_HEIGHT), (pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png'))])
 		
         self.image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
         self.step = speed
@@ -355,15 +355,8 @@ class Game:
                 self.bonus.hp = 1
 
             # Bonus Schiff Malen
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if self.bonus.list[0] > 0:
-=======
-            if self.bonus is not None:
->>>>>>> dc3548113b643415fd8afa3fa14ae0f711a13a2c
-=======
             if self.bonus.hp > 0:
->>>>>>> bfd0ae6b2050901d5c8c6c3a464590416166bb51
+
                 self.bonus.walk()
 
 
