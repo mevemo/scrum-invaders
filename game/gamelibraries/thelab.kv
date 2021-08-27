@@ -1,6 +1,26 @@
 WidgetsExample:
-
     <WidgetsExample>:
+        cols: 3
+        ToggleButton:
+            text:'OFF '
+            on_state: root.on_toggle_button_state(self)
+            size_hint: None, 1
+            width: '100dp'
+        Button:
+            text: "Count"
+            on_press: root.on_button_click()
+            disable: not root.count_enabled
+        Label:
+            text: root.my_text
+            font_name: "28 Days Later.ttf"
+            font_size: "100dp"
+            color: .2, .3, .8, 1
+        Switch:
+            id: my_switch
+            on_active: root.on_switch_acitve(self)
+            size_hint: None, 1
+            width: '100dp'
+            active: True
 
         Slider:
             id: my_slider
@@ -17,3 +37,12 @@ WidgetsExample:
             ProgressBar:
                 max:100
                 value: my_slider.value
+        TextInput:
+            id: my_text_input
+            size_hint: None, 1
+            width: '100dp'
+            text: "foo"
+            multiline: False
+            on_text_validate: root.on_text_validate(self)
+        Label:
+            text: "Your Name is: " + root.text_input_str
