@@ -362,14 +362,14 @@ class Game:
                         gegner_bullets.remove(bullet)
                         element[0] -= 1
 
-                # Wenn die Kugel das schiff trifft
+                # Wenn die gegner_bullet das schiff trifft
                 if self.ship.spieler.colliderect(bullet):
                         explosionSound = pygame.mixer.Sound("explosion.wav")
                         explosionSound.play()
                         self.ship.hp -= 1
                         gegner_bullets.remove(bullet)
 
-                # Wenn sie noch in Spielfeld bleibt, fliegt sie weiter
+                # Wenn sie noch inm Spielfeld bleibt, fliegt sie weiter
                 if bullet.y + BULLET_VEL < HOEHE:
                     bullet.y += BULLET_VEL  
                 elif bullet.y + BULLET_VEL >= HOEHE: 
