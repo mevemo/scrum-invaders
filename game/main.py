@@ -23,7 +23,7 @@ COLORS = [(255,0,0), (255,165,0), (0,255,0) ]
 bg = pygame.image.load('bg.png')
 BULLET_VEL = 10
 VEL = 5
-AMMO = 3
+AMMO = 30
          # ↓ Wird für Startmenu gebraucht ↓
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
@@ -215,7 +215,13 @@ class Gegner:
         if self.count % 40 == 0:
             bulletSound = pygame.mixer.Sound("laser.wav")
             bulletSound.play()
-            ballermann = random.randint(1, len(self.list)-1)
+            # Wüfelt so lange bis ein ballermann rauskommt der am leben ist
+            while True:
+                ballermann = random.randint(1, len(self.list)-1)
+                if self.list[ballermann][0] > 0:
+                    break
+
+
             bullet = pygame.Rect(self.list[ballermann][1].x + 25 , self.list[ballermann][1].y +50, 10, 10)
             gegner_bullets.append(bullet)
         # self.kurz_image = pygame.image.load('gegner' + str(random.randint(0, 5)) + '.png')
@@ -449,6 +455,7 @@ class Game:
                 self.gegner_speed += 1
                 # Hier wird die AMMO größer
                 self.ship.ammo += 3
+                self.deckung = Deckung(self.surface)
                 game.gegner = Gegner(self.surface, self.gegner_speed)
 
             if self.ship.hp <= 0:
