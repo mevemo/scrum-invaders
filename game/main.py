@@ -28,7 +28,7 @@ AMMO = 3
 DISPLAY = pygame.display.set_mode((BREITE, HOEHE))
 START_MUSIC = pygame.mixer.Sound('start_music_StarWars.mp3')
 SPACESHIP = pygame.transform.scale(pygame.image.load('ship.png'), (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
-BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 45)
+BONUSSHIP = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bonus_space-ship.png'), (65, 65)), 22.5)
 BULLET = pygame.transform.rotate(pygame.transform.scale(pygame.image.load('bullet1.png'), (20,20)), 45)
 #game_over = pygame.image.load('gameover.png')
 game_over = pygame.transform.scale(pygame.image.load('gameover.png'), (BREITE, HOEHE))
@@ -153,8 +153,9 @@ class Ship:
 class Bonus_Ship:
     def __init__(self, parent_screen):
         self.step = 2
+        self.hp = 0
         self.surface = parent_screen
-        self.list = [2, pygame.Rect(0, 0, 65, 65)]
+        self.list = [0, pygame.Rect(0, 0, 65, 65)]
     
     def walk(self):
         if self.list[1].x + 35 + self.step > BREITE:
@@ -253,10 +254,11 @@ class Game:
         # Initialisiert Pygame:
         pygame.init()
         
-        self.bonus = None
-
         # Legt Breite und Höhe des Spielfensters fest
         self.surface = pygame.display.set_mode((BREITE,HOEHE))
+        
+        # Erschafft ein Bonus Shuip mit 0 HP im Hintergrund für später
+        self.bonus = Bonus_Ship(self.surface)
         
         self.gegner_speed = 1
 
@@ -342,14 +344,18 @@ class Game:
             
             # Bonus Schiff kommt in's Spiel 
             if self.score_value % 9 == 0 and self.score_value != 0:
-                self.bonus.list[0] = 1
+                self.bonus.hp = 1
 
             # Bonus Schiff Malen
+<<<<<<< HEAD
 <<<<<<< HEAD
             if self.bonus.list[0] > 0:
 =======
             if self.bonus is not None:
 >>>>>>> dc3548113b643415fd8afa3fa14ae0f711a13a2c
+=======
+            if self.bonus.hp > 0:
+>>>>>>> bfd0ae6b2050901d5c8c6c3a464590416166bb51
                 self.bonus.walk()
 
 
@@ -364,14 +370,14 @@ class Game:
                         gegner_bullets.remove(bullet)
                         element[0] -= 1
 
-                # Wenn die Kugel das schiff trifft
+                # Wenn die gegner_bullet das schiff trifft
                 if self.ship.spieler.colliderect(bullet):
                         explosionSound = pygame.mixer.Sound("explosion.wav")
                         explosionSound.play()
                         self.ship.hp -= 1
                         gegner_bullets.remove(bullet)
 
-                # Wenn sie noch in Spielfeld bleibt, fliegt sie weiter
+                # Wenn sie noch inm Spielfeld bleibt, fliegt sie weiter
                 if bullet.y + BULLET_VEL < HOEHE:
                     bullet.y += BULLET_VEL  
                 elif bullet.y + BULLET_VEL >= HOEHE: 
@@ -382,13 +388,13 @@ class Game:
 
             # Hier handeln wir die fliegenden Bullets vom SPACESHIP
             for bullet in bullets:
-                # pygame.draw.rect(self.surface, BLUE, bullet)
+                # Bewege die Bullet 
                 if bullet.y - BULLET_VEL > 0:
                     bullet.y -= BULLET_VEL  
                 else: 
                     bullets.remove(bullet)
                 
-                
+                # Prüft ob die Bullet des Schiffs einen Gegner trifft
                 for jener_gegner in self.gegner.list:
                     if jener_gegner[1].colliderect(bullet) and jener_gegner[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
@@ -398,6 +404,7 @@ class Game:
                         bullets.remove(bullet)
                         jener_gegner[0] = 0
 
+                # Prüft ob eine Bullet des Schiffs die eigene Deckung trifft
                 for element in self.deckung.list:
                     if element[1].colliderect(bullet) and element[0] > 0:
                         explosionSound = pygame.mixer.Sound("explosion.wav")
@@ -405,16 +412,20 @@ class Game:
                         bullets.remove(bullet)
                         element[0] -= 1
 
+                #Prüfe ob eine Bullet das Bonusship trifft
+                if self.bonus.list[1].colliderect(bullet) and self.bonus.hp > 0:
+                    self.ship.hp += 1
+                    self.bonus.hp = 0
 
 
+                # Zeichne die Bullet
                 self.surface.blit(BULLET, (bullet.x, bullet.y))
-            #alles neu macht der mai
-            alive = False
-            if self.score_value > 5:
-                game.bonus = Bonus_Ship(self.surface)
-                
+            
+            # Einführen einer gegner_alive Variable um später zu checken ob alle Gegner tot sind
+            gegner_alive = False
 
-            # Hier checken wir ob ein gegner das schiff trifft und machen dann was damit:
+
+            # Hier checken wir ob ein gegner das Schiff trifft und machen dann was damit:
             for jener_gegner in self.gegner.list:
                 
                 if jener_gegner[1].colliderect(self.ship.spieler) and jener_gegner[0] > 0:
@@ -436,9 +447,9 @@ class Game:
                     self.surface.blit(game_over, (0, 0))
 
                 if jener_gegner[0] > 0:
-                    alive = True
+                    gegner_alive = True
                 
-            if alive == False:
+            if gegner_alive == False:
                 self.gegner_speed += 2
                 game.gegner = Gegner(self.surface, self.gegner_speed)
 
@@ -454,7 +465,7 @@ class Game:
             # RESRESH
             pygame.display.flip()
 
-            # Mach ma Halblang wurde durch FPW ersetzt
+            # Mach ma Halblang wurde durch FPS ersetzt
             # time.sleep(0.2)
 
 
