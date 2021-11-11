@@ -1,17 +1,15 @@
-# SCRUM
+# SCRUM-PROJEKT
 
-Hier können wir unser Projekt vorstellen und beschreiben worum es dabei geht.
+Wir sind ein Team aus angehenden Anwendungsentwicklern aus Hamburg in Europa.
 
-Also zum Beispiel kann ich schonmal schreiben, dass wir ein Team aus angehenden Anwendungsentwicklern aus Hamburg in Europa sind.
-
-Wir haben in der vorigen Woche agiles Arbeiten nach SCRUM Regeln vorgestellt bekommen 
-und sollen dieses in den folgenden 5 Tagen im Rahmen eines kleinen Softwareprojekts ausprobieren und weiter kennenlernen.
+In der vorigen Woche wurde uns agiles Arbeiten nach SCRUM Regeln vorgestellt.
+In den folgenden 5 Tagen werden wir das erlernte im Rahmen eines kleinen Softwareprojekts ausprobieren.
 
 # DIE ENTSCHEIDUNG FIEL AUF EINEN ASTEROIDS KLON
 
 Unser team hat entschieden innerhalb der Sprache Python das PyGame Modul zu verwenden. Es bietet einen leichten Einstieg in die Spieleentwicklung. Und bleibt Syntaktisch aber so allgemein, dass man die hier gewonnenen Erfahrungen auch in vielen anderen Gebieten einsetzen kann.
 
-## Und so weiter und so fort
+## MORE TO COME
 
 - 🔭 Wir haben grade scrum gelernt
 - 🌱 Momentan lernen wir alles neu 🤣
