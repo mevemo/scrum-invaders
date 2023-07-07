@@ -1,4 +1,4 @@
-# Scrum-Based Project
+# Scrum-Based-PyGame-Dev-Project
 
 Welcome to our small side-project repository! We are a team of aspiring application developers based in Hamburg, Europe. 
 
